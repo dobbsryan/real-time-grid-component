@@ -12,6 +12,8 @@ class VerifyCsrfToken extends BaseVerifier
      * @var array
      */
     protected $except = [
-        //
+    
+        'api/*' // temp solution for testing posts for only passing data to channel for broadcasting; has to do with sockets
+
     ];
 }

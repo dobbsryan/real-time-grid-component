@@ -16,8 +16,10 @@ use Illuminate\Support\Facades\Redis;
 
 Route::get('/', function () {
 	//Redis::set('name', 'Ryan');
-	event(new UserChangedActiveCell(-1,-1)); // upon loading page, will reset sheet so that no cells are selected
+	event(new UserChangedActiveCell()); // upon loading page, will reset sheet so that no cells are selected
 
 	// Return Redis::get('name');
     return view('welcome'); // will have the client versions of socket.io and vue in our case
 });
+
+Route::post('api/updateActiveCell', 'ActiveCellController@method');

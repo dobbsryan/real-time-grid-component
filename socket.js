@@ -24,8 +24,9 @@ redis.on('message', function(channel, message) {
 	// emit message to all clients; emit() takes two parameters;
 	// 1st: the channel and message event
 	// 2nd: message data
+	message = JSON.parse(message);
 	io.emit(channel + ':' + message.event, message.data);
 });
 
 // have node server listening on this port
-server.listen(3000);
+server.listen(8080);

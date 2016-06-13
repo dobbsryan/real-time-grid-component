@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Real Time Grid Component</title>
+        <title>Real-time Grid Component</title>
     </head>
     <body>
-        
+        <app></app>
+        <script src="/js/main.js"></script>
         <script>
-            var socket = io.('http://192.169.10.10:3000');
+        	localStorage.debug = '*';
         </script>
     </body>
 </html>

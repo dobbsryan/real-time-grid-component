@@ -18,7 +18,7 @@ class UserChangedActiveCell extends Event implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct($rowIndex, $columnIndex)
+    public function __construct($rowIndex = -1, $columnIndex = -1)
     {
         $this->rowIndex = $rowIndex;
         $this->columnIndex = $columnIndex;
