@@ -61,8 +61,6 @@ export default new Vuex.Store({
     mutations: {
         ACTIVE_CELL_POSITION (state, rowIndex, columnIndex) {
 
-            console.log('in store.js: ' + rowIndex, columnIndex)
-
             state.activeRowIndex = rowIndex;
             state.activeColumnIndex = columnIndex;
 

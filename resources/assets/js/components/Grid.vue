@@ -55,8 +55,6 @@
         ready: function() {
             socket.on('clicked-cell-channel:App\\Events\\UserChangedActiveCell', function(data) {
                 
-                console.log(data.rowIndex);
-                console.log(data.columnIndex);
                 this.makingCellActive(data.rowIndex, data.columnIndex);
                 
             }.bind(this));

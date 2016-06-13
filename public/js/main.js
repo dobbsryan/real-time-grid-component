@@ -20069,8 +20069,6 @@ exports.default = {
     ready: function ready() {
         socket.on('clicked-cell-channel:App\\Events\\UserChangedActiveCell', function (data) {
 
-            console.log(data.rowIndex);
-            console.log(data.columnIndex);
             this.makingCellActive(data.rowIndex, data.columnIndex);
         }.bind(this));
     },
@@ -20133,9 +20131,6 @@ var updateActiveCellPosition = exports.updateActiveCellPosition = function updat
     var dispatch = _ref.dispatch;
     var state = _ref.state;
 
-
-    console.log('rowIndex: ' + rowIndex);
-    console.log('columnIndex: ' + columnIndex);
 
     dispatch('ACTIVE_CELL_POSITION', rowIndex, columnIndex);
 };
@@ -20214,8 +20209,6 @@ exports.default = new _vuex2.default.Store({
 
     mutations: {
         ACTIVE_CELL_POSITION: function ACTIVE_CELL_POSITION(state, rowIndex, columnIndex) {
-
-            console.log('in store.js: ' + rowIndex, columnIndex);
 
             state.activeRowIndex = rowIndex;
             state.activeColumnIndex = columnIndex;
