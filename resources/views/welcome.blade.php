@@ -6,8 +6,5 @@
     <body>
         <app></app>
         <script src="/js/main.js"></script>
-        <script>
-        	//localStorage.debug = '*';
-        </script>
     </body>
 </html>

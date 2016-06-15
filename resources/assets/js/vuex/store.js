@@ -5,16 +5,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
         
-    strict: true, // for dev only to throw warning if state updated outside of mutations
-
     state: function() {
 
-        var activeRowIndex = -1;
-        var activeColumnIndex = -1;
+        let activeRowIndex = -1;
+        let activeColumnIndex = -1;
 
-        var columns = ['row', 'name', 'date1', 'date2'];
+        let columns = ['row', 'name', 'date1', 'date2'];
 
-        var data = [
+        let data = [
             {
                 row: 1,
                 name: 'Chuck Norris',
@@ -34,7 +32,7 @@ export default new Vuex.Store({
                 row: 4,
                 name: 'Jet Li',
                 date1: 'xs',
-            date2: 'xs'
+                date2: 'xs'
             }, {
                 row: 5,
                 name: 'Donnie Yen',
@@ -49,21 +47,17 @@ export default new Vuex.Store({
         ];
 
         return {
-
-            activeRowIndex: activeRowIndex,
-            activeColumnIndex: activeColumnIndex,
-            columns: columns,
-            data: data
-
+            activeRowIndex,
+            activeColumnIndex,
+            columns,
+            data
         };
     },
 
     mutations: {
-        ACTIVE_CELL_POSITION (state, rowIndex, columnIndex) {
-
+        ACTIVE_CELL_POSITION: (state, rowIndex, columnIndex) => {
             state.activeRowIndex = rowIndex;
             state.activeColumnIndex = columnIndex;
-
         }
     }
 });

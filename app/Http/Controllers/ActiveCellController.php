@@ -16,5 +16,4 @@ class ActiveCellController extends Controller
         $columnIndex = $request->columnIndex;
         event(new UserChangedActiveCell($rowIndex, $columnIndex));
     }
-    
 }

@@ -6,10 +6,8 @@
 
 <script>
 	import Grid from './Grid.vue'
-	import store from '../vuex/store'
 
 	export default {
 		components: { Grid },
-		store
 	}
 </script>

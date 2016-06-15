@@ -19994,15 +19994,10 @@ var _Grid = require('./Grid.vue');
 
 var _Grid2 = _interopRequireDefault(_Grid);
 
-var _store = require('../vuex/store');
-
-var _store2 = _interopRequireDefault(_store);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
-	components: { Grid: _Grid2.default },
-	store: _store2.default
+	components: { Grid: _Grid2.default }
 };
 if (module.exports.__esModule) module.exports = module.exports.default
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div id=\"app\">\n\t<grid></grid>\n</div>\n"
@@ -20016,7 +20011,7 @@ if (module.hot) {(function () {  module.hot.accept()
     hotAPI.update("_v-8bcf0936", module.exports, (typeof module.exports === "function" ? module.exports.options : module.exports).template)
   }
 })()}
-},{"../vuex/store":56,"./Grid.vue":53,"vue":48,"vue-hot-reload-api":46}],53:[function(require,module,exports){
+},{"./Grid.vue":53,"vue":48,"vue-hot-reload-api":46}],53:[function(require,module,exports){
 var __vueify_insert__ = require("vueify/lib/insert-css")
 var __vueify_style__ = __vueify_insert__.insert("\nbody {\n  font-family: Helvetica Neue, Arial, sans-serif;\n  font-size: 14px;\n  color: #444;\n}\n\ntable {\n  border: 2px solid #42b983;\n  border-radius: 3px;\n  background-color: #fff;\n}\n\nth {\n  background-color: #42b983;\n  color: rgba(255, 255, 255, 0.66);\n  cursor: pointer;\n  -webkit-user-select: none;\n  -moz-user-select: none;\n  -user-select: none;\n}\n\ntd {\n  background-color: #f9f9f9;\n}\n\n.cell {\n    width: 200px;\n}\n.cell.activeRow.activeColumn {\n    background-color: #B2DECA;\n}\n.view label {\n    white-space: pre;\n    word-break: break-word;\n    padding: 6px;\n    display: block;\n    line-height: 1.2;\n    -webkit-transition: color 0.4s;\n    transition: color 0.4s;\n}\n\n.cell.editing .view {\n    display: none;\n}\n\nth,\ntd {\n  min-width: 120px;\n}\n\n")
 'use strict';
@@ -20037,7 +20032,6 @@ var _socket2 = _interopRequireDefault(_socket);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//import VueResource from 'vue-resource';
 _vue2.default.use(require('vue-resource'));
 
 var socket = (0, _socket2.default)('http://192.168.10.10:8080');
@@ -20045,8 +20039,8 @@ var socket = (0, _socket2.default)('http://192.168.10.10:8080');
 exports.default = {
     vuex: {
         actions: {
-            // called on upon initial load
-            makingCellActive: _actions.updateActiveCellPosition
+            // es6 shorthand
+            updateActiveCellPosition: _actions.updateActiveCellPosition
         },
         getters: {
             columns: function columns(state) {
@@ -20069,9 +20063,10 @@ exports.default = {
     ready: function ready() {
         socket.on('clicked-cell-channel:App\\Events\\UserChangedActiveCell', function (data) {
 
-            this.makingCellActive(data.rowIndex, data.columnIndex);
+            this.updateActiveCellPosition(data.rowIndex, data.columnIndex);
         }.bind(this));
     },
+
 
     methods: {
         // called on as a result of user clicking on cell
@@ -20080,7 +20075,6 @@ exports.default = {
             _vue2.default.http.post('api/updateActiveCell', { rowIndex: rowIndex, columnIndex: columnIndex });
         }
     }
-
 };
 if (module.exports.__esModule) module.exports = module.exports.default
 ;(typeof module.exports === "function"? module.exports.options: module.exports).template = "\n<div class=\"table\">\n    <table>\n        <thead>\n            <tr>\n                <th v-for=\"key in columns\">\n                    {{ key | capitalize }}\n                </th>\n            </tr>\n        </thead>\n        <tbody>\n            <tr v-for=\"(rowIndex, entry) in data\">\n                <td v-for=\"(columnIndex, key) in columns\" class=\"cell\" :class=\"{activeRow: rowIndex == activeRowIndex,\n                             activeColumn: columnIndex == activeColumnIndex}\">\n                    <div class=\"view\">\n                        <label @click=\"makeCellActive(rowIndex, columnIndex)\">{{ entry[key] }}</label>\n                    </div>\n                </td>\n            </tr><tr>\n        </tr></tbody>\n    </table>\n</div>\n"
@@ -20119,7 +20113,8 @@ new _vue2.default({
     store: _store2.default,
     el: 'body',
     components: { App: _App2.default }
-});
+}); // import io from 'socket.io-client';
+// const socket = io('http://192.168.10.10:8080');
 
 },{"./components/App.vue":52,"./vuex/store":56,"vue":48}],55:[function(require,module,exports){
 'use strict';
@@ -20129,8 +20124,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 var updateActiveCellPosition = exports.updateActiveCellPosition = function updateActiveCellPosition(_ref, rowIndex, columnIndex) {
     var dispatch = _ref.dispatch;
-    var state = _ref.state;
-
 
     dispatch('ACTIVE_CELL_POSITION', rowIndex, columnIndex);
 };
@@ -20155,8 +20148,6 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 _vue2.default.use(_vuex2.default);
 
 exports.default = new _vuex2.default.Store({
-
-    strict: true, // for dev only to throw warning if state updated outside of mutations
 
     state: function state() {
 
@@ -20198,18 +20189,15 @@ exports.default = new _vuex2.default.Store({
         }];
 
         return {
-
             activeRowIndex: activeRowIndex,
             activeColumnIndex: activeColumnIndex,
             columns: columns,
             data: data
-
         };
     },
 
     mutations: {
         ACTIVE_CELL_POSITION: function ACTIVE_CELL_POSITION(state, rowIndex, columnIndex) {
-
             state.activeRowIndex = rowIndex;
             state.activeColumnIndex = columnIndex;
         }

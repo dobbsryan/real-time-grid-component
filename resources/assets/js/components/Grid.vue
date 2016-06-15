@@ -29,18 +29,17 @@
 
 <script>
     import Vue from 'vue';
-    import { updateActiveCellPosition } from '../vuex/actions';
-    import io from 'socket.io-client';
-    //import VueResource from 'vue-resource';
     Vue.use(require('vue-resource'));
+    import { updateActiveCellPosition } from '../vuex/actions';
 
+    import io from 'socket.io-client';
     const socket = io('http://192.168.10.10:8080');
 
     export default {
         vuex: {
             actions: {
-                // called on upon initial load
-                makingCellActive: updateActiveCellPosition 
+                // es6 shorthand
+                updateActiveCellPosition 
             },
             getters: {
                 columns: state => state.columns,
@@ -52,10 +51,10 @@
             }
         },
         
-        ready: function() {
+        ready () {
             socket.on('clicked-cell-channel:App\\Events\\UserChangedActiveCell', function(data) {
                 
-                this.makingCellActive(data.rowIndex, data.columnIndex);
+                this.updateActiveCellPosition(data.rowIndex, data.columnIndex);
                 
             }.bind(this));
         },
@@ -67,7 +66,6 @@
                 Vue.http.post('api/updateActiveCell', { rowIndex, columnIndex });
             }
         }
-
     }
 </script>
 
