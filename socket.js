@@ -14,14 +14,16 @@ var redis = new Redis();
 // subscribing to channel from Laravel events
 redis.subscribe('clicked-cell-channel');
 
-// whenever any kind of message comes through on that channel, we acknowledge by sending the message to the console
+// whenever any kind of message comes through on that channel, here's what we do with it 
 redis.on('message', function(channel, message) {
 
+	// to confirm data being received and console out
 	console.log(channel, message);
 
+	// format and pass along to all client listening on channel
 	message = JSON.parse(message);
 	io.emit(channel + ':' + message.event, message.data);
-	
+
 });
 
 // have node server listening on this port
