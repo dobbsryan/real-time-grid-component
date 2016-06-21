@@ -20024,11 +20024,11 @@ var _vue = require('vue');
 
 var _vue2 = _interopRequireDefault(_vue);
 
-var _actions = require('../vuex/actions');
-
 var _socket = require('socket.io-client');
 
 var _socket2 = _interopRequireDefault(_socket);
+
+var _actions = require('../vuex/actions');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -20070,6 +20070,7 @@ exports.default = {
 
     methods: {
         // called on as a result of user clicking on cell
+
         makeCellActive: function makeCellActive(rowIndex, columnIndex) {
             console.log(rowIndex, columnIndex);
             _vue2.default.http.post('api/updateActiveCell', { rowIndex: rowIndex, columnIndex: columnIndex });

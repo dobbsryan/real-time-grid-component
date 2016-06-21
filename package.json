@@ -13,7 +13,7 @@
     "ioredis": "^2.0.1",
     "laravel-elixir-vueify": "^1.0.3",
     "socket.io": "^1.4.6",
-    "vue": "^1.0.24",
+    "vue": "^1.0.25",
     "vue-resource": "^0.7.2",
     "vuex": "^0.6.3"
   }

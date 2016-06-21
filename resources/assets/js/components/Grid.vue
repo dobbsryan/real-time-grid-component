@@ -30,10 +30,11 @@
 <script>
     import Vue from 'vue';
     Vue.use(require('vue-resource'));
-    import { updateActiveCellPosition } from '../vuex/actions';
-
+    
     import io from 'socket.io-client';
     const socket = io('http://192.168.10.10:8080');
+
+    import { updateActiveCellPosition } from '../vuex/actions';
 
     export default {
         vuex: {
@@ -51,7 +52,7 @@
             }
         },
         
-        ready () {
+        ready() {
             socket.on('clicked-cell-channel:App\\Events\\UserChangedActiveCell', function(data) {
                 
                 this.updateActiveCellPosition(data.rowIndex, data.columnIndex);
@@ -61,7 +62,7 @@
 
         methods: {
             // called on as a result of user clicking on cell
-            makeCellActive: function(rowIndex, columnIndex) {
+            makeCellActive(rowIndex, columnIndex) {
                 console.log(rowIndex, columnIndex);
                 Vue.http.post('api/updateActiveCell', { rowIndex, columnIndex });
             }
